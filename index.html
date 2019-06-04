@@ -182,32 +182,32 @@
 
 <script>
   var fireballSize = 22; // управляет размером фаербола
-  var getFireballSpeed = function (left) {
+  var getFireballSpeed = function(left) {
     if (left) {
       return 5;
-    } else (!left) {
+    } else {
       return 2;
     }
   }
 
   var wizardSpeed = 3; // скорость мага
   var wizardWidth = 70; // ширина мага
-  var getWizardHeight = () >= 1.337 * wizardWidth;
 
-  var getWizardX = function (width) {
+  var getWizardHeight = function() {
+    return 1.337 * wizardWidth;
+  } //функция, которая возвращает пропорциональную высоту мага
+
+  var getWizardX = function(width) {
     if (width) {
-      return center;
+      return width / 2 - wizardWidth / 2;
     }
   } // ширина игровой области
 
-  // var getWizardY = function (height * (2 / 3)) {} // высота игровой области
-
-
-  var getWizardY = function (height) {
+  var getWizardY = function(height) {
     if (height) {
-      return * (2 / 3);
+      return height * 2 / 3 - getWizardHeight();
     }
-  }
+  }// высота игровой области
 </script>
 
 <script src="js/game.js"></script>
