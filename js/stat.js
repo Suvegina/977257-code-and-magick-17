@@ -4,7 +4,7 @@ var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var colorText = '#000000';
 var currentBarColor = 'rgba(255, 0, 0, 1)'; // Цвет статистики - игрок "Вы"
-var otherBarColor = 'rgba(0, 0, 255, 1)'; // Цвет статистики остальных игроков
+// var otherBarColor = 'rgba(0, 0, 255, 1)'; // Цвет статистики остальных игроков
 var STARTING_POINTS_ELEM_X = 150; // Начальная точка отрисовки объектов
 var WIDTH_BAR = 40; // Ширина колонок
 var HEIGHT_BAR_MAX = 150; // Максимальная высота колонки
@@ -40,17 +40,17 @@ var getMaxElement = function (arr) {
 
 // Тоже самое делаем с минимальным элементом
 
-var getMinElement = function (arr) {
-  var minElement = arr[0];
+// var getMinElement = function (arr) {
+//   var minElement = arr[0];
 
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] < minElement) {
-      minElement = arr[i];
-    }
-  }
+//   for (var i = 0; i < arr.length; i++) {
+//     if (arr[i] < minElement) {
+//       minElement = arr[i];
+//     }
+//   }
 
-  return minElement; // Определяем минимальную высоту колонки
-};
+//   return minElement; // Определяем минимальную высоту колонки
+// };
 
 window.renderStatistics = function (ctx, names, times) {
 
@@ -73,12 +73,12 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(Math.round(times[i]), STARTING_POINTS_ELEM_X + (FONT_GAP + GAP) * i, positionTimeY + HEIGHT_BAR_MAX - (HEIGHT_BAR_MAX * times[i]) / maxTime);// Цикл смещения временнЫх результатов
     ctx.fillText(names[i], STARTING_POINTS_ELEM_X + (WIDTH_BAR + GAP) * i, positionNameY); // Цикл смещения имён
 
-    // Переопределим цвет и насыщенность текущей колонки 
-    // Создаем условие покраса шкалы статистики 
-    if (names[i] == 'Вы') {
+    // Переопределим цвет и насыщенность текущей колонки
+    // Создаем условие покраса шкалы статистики
+    if (names[i] === 'Вы') {
       ctx.fillStyle = currentBarColor;
     } else {
-      console.log(Math.round(255 * times[i] / maxTime));
+      // console.log(Math.round(255 * times[i] / maxTime));
       ctx.fillStyle = 'rgba(' + Math.round(170 - 170 * (times[i] - minTime) / (maxTime - minTime)) + ', ' + Math.round(170 - 170 * (times[i] - minTime) / (maxTime - minTime)) + ' , 170 , 1)';
     }
     // Цикл смещения прямоугольников
@@ -86,10 +86,10 @@ window.renderStatistics = function (ctx, names, times) {
     // столбца (barWidth) на время игрока, которое мы хотим отобразить в столбце (times[i])
     // и разделить результат на максимальное время.
     ctx.fillRect(
-      STARTING_POINTS_ELEM_X + (WIDTH_BAR + GAP) * i,
-      positionStatY + HEIGHT_BAR_MAX - (HEIGHT_BAR_MAX * times[i]) / maxTime,
-      GAP,
-      HEIGHT_BAR_MAX * times[i] / maxTime
+        STARTING_POINTS_ELEM_X + (WIDTH_BAR + GAP) * i,
+        positionStatY + HEIGHT_BAR_MAX - (HEIGHT_BAR_MAX * times[i]) / maxTime,
+        GAP,
+        HEIGHT_BAR_MAX * times[i] / maxTime
     );
   }
 };
