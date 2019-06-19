@@ -69,6 +69,10 @@ var wizards = [
 
 for (var i = 0; i < 4; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
+  // Random random = new Random();
+  // ... Здесь нужно написать рандомный код пример как на сайте:
+  // http://developer.alexanderklimov.ru/android/java/random.php
+  // Из раздела "Случайные цвета"
   wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name + wizards[i].female;
   wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
