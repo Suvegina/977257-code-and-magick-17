@@ -49,7 +49,7 @@ var WIZARD_PLAYERS = {
   ]
 };
 
-function getRandomItem (arr) {
+function getRandomItem(arr) {
   return Math.floor(Math.random() * arr.length);
 }
 
