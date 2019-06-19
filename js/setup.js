@@ -11,7 +11,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
-var WIZARD_NAMES = {
+var WIZARD_PLAYERS = {
   name: [
     'Иван',
     'Хуан Себастьян',
@@ -22,7 +22,7 @@ var WIZARD_NAMES = {
     'Люпита',
     'Вашингтон'
   ],
-  female: [
+  surname: [
     ' да Марья',
     ' Верон',
     ' Мирабелла',
@@ -31,71 +31,33 @@ var WIZARD_NAMES = {
     ' Топольницкая',
     ' Нионго',
     ' Ирвинг'
+  ],
+  coatColor: [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ],
+  eyesColor: [
+    'black',
+    'red',
+    'blue',
+    'yellow',
+    'green'
   ]
 };
 
-var wizards = [
-  {
-    name: WIZARD_NAMES.name[0] + WIZARD_NAMES.female[0],
-    coatColor: 'rgb(101, 137, 164)',
-    eyesColor: 'black'
-  },
-  {
-    name: WIZARD_NAMES.name[1] + WIZARD_NAMES.female[1],
-    coatColor: 'rgb(241, 43, 107)',
-    eyesColor: 'red'
-  },
-  {
-    name: WIZARD_NAMES.name[2] + WIZARD_NAMES.female[2],
-    coatColor: 'rgb(146, 100, 161)',
-    eyesColor: 'blue'
-  },
-  {
-    name: WIZARD_NAMES.name[3] + WIZARD_NAMES.female[3],
-    coatColor: 'rgb(56, 159, 117)',
-    eyesColor: 'yellow'
-  },
-  {
-    name: WIZARD_NAMES.name[4] + WIZARD_NAMES.female[4],
-    coatColor: 'rgb(215, 210, 55)',
-    eyesColor: 'green'
-  },
-  {
-    name: WIZARD_NAMES.name[5] + WIZARD_NAMES.female[5],
-    coatColor: 'rgb(0, 0, 0)',
-    eyesColor: 'black'
-  }
-];
+function getRandomItem (arr) {
+  return Math.floor(Math.random() * arr.length);
+}
 
 for (var i = 0; i < 4; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  // Random random = new Random();
-  // ... Здесь нужно написать рандомный код пример как на сайте:
-  // http://developer.alexanderklimov.ru/android/java/random.php
-  // Из раздела "Случайные цвета"
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name + wizards[i].female;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+
+  wizardElement.querySelector('.setup-similar-label').textContent = WIZARD_PLAYERS.name[getRandomItem(WIZARD_PLAYERS.name)] + WIZARD_PLAYERS.surname[getRandomItem(WIZARD_PLAYERS.surname)];
+  wizardElement.querySelector('.wizard-coat').style.fill = WIZARD_PLAYERS.coatColor[getRandomItem(WIZARD_PLAYERS.coatColor)];
+  wizardElement.querySelector('.wizard-eyes').style.fill = WIZARD_PLAYERS.eyesColor[getRandomItem(WIZARD_PLAYERS.eyesColor)];
   similarListItem.appendChild(wizardElement);
 }
-
-
-//     coatColor: [
-//       'rgb(101, 137, 164)',
-//       'rgb(241, 43, 107)',
-//       'rgb(146, 100, 161)',
-//       'rgb(56, 159, 117)',
-//       'rgb(215, 210, 55)',
-//       'rgb(0, 0, 0)'
-//     ],
-
-//     eyesColor: [
-//       'black',
-//       'red',
-//       'blue',
-//       'yellow',
-//       'green'
-//     ]
-
-// var WIZARD_COAT = document.querySelector('.wizard-coat')fillStyle = 'coatColor';
-// var WIZARD_EYES = document.querySelector('.wizard-eyes')fillStyle = 'eyesColor';
