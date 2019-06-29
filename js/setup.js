@@ -51,7 +51,7 @@ var WIZARD_PLAYERS = {
 
 function getRandomItem(arr) {
   return Math.floor(Math.random() * arr.length);
-}
+};
 
 for (var i = 0; i < 4; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -60,7 +60,11 @@ for (var i = 0; i < 4; i++) {
   wizardElement.querySelector('.wizard-coat').style.fill = WIZARD_PLAYERS.coatColor[getRandomItem(WIZARD_PLAYERS.coatColor)];
   wizardElement.querySelector('.wizard-eyes').style.fill = WIZARD_PLAYERS.eyesColor[getRandomItem(WIZARD_PLAYERS.eyesColor)];
   similarListItem.appendChild(wizardElement);
-}
+};
+
+// Заводим константы со значением для кей-кодов ( для доступности с клавиатуры)
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 // Нажатие на элемент .setup-open удаляет класс hidden
 // у блока setup. Нажатие на элемент .setup-close, расположенный
@@ -70,41 +74,48 @@ var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = document.querySelector('.setup-close');
 
-setupOpen.addEventListener('click', function() {
+var onPopupEscPress = function(evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function() {
   setup.classList.remove('hidden');
-  // Обработчик закрытия окна по ESC стоит добавлять
-  // только тогда, когда окно появляется на странице.
-  document.addEventListener('keyDown', function() {
-    if (evt.keyDown === 27) {
-      setup.classList.add('hidden');
-    }
-  });
+  document.addEventListener('keyDown', onPopupEscPress);
+};
+
+var closePopup = function() {
+  setup.classList.add('hidden');
+  document.removeEventListener('keyDown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function() {
+  openPopup();
 });
 
-// Теперь, на элемент .setup-open можно поставить фокус с клавиатуры,
-// сделаем так, чтобы нажатие на Enter (keyCode === 13) на этом элементе открывало попап.
-// Для этого нужно добавить еще один обработчик события.
 setupOpen.addEventListener('keyDown', function(evt) {
-  if (evt.keyCode === 13) {
-    setup.classList.remove('hidden');
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
   }
-})
-
-setupClose.addEventListener('click', function() {
-  setup.classList.add('hidden');
 });
 
 // Теперь, если поставить фокус на крестике,
 // при нажатии на Enter окно настройки персонажа будет закрываться,
 // для этого напишем еще 1 обработчик.
-setupClose.addEventListener('keyDown', function(evt) {
-  if (keyCode === 13) {
-    setup.classList.add('hidden');
-  }
-})
+setupClose.addEventListener('click', function() {
+  closePopup();
+});
 
-var userNameInput = setup.querySelector('.setup-user-name');
+setupClose.addEventListener('keyDown', function(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+// а теперь преейдем к валидации формы:
 // если поле невалидно, указать .setCustomValidity сообщение, описывающее проблему.
+var userNameInput = setup.querySelector('.setup-user-name');
 
 userNameInput.add ('invalid', function(evt) {
   if (userNameInput.validity.tooShort) {
@@ -129,3 +140,5 @@ userNameInput.addEventListener('input', function(evt) {
     target.setCustomValidity('');
   }
 });
+
+// добавим доступности закрывающему крестику
