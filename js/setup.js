@@ -92,9 +92,15 @@ var closePopup = function () {
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
+// внутри обработчика добавляем доп. обработчик, который будет проверять:
+// "если событие обрабатывается на НЕинпуте
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    closePopup();
+    if (evt.target !== userNameInput) {
+      event.preventDefault(evt);
+
+      closePopup();
+    }
   }
 };
 
@@ -108,7 +114,6 @@ setupOpen.addEventListener('keydown', function (evt) {
   }
 });
 
-// Теперь, если поставить фокус на крестике,
 // при нажатии на Enter окно настройки персонажа будет закрываться,
 // для этого напишем еще 1 обработчик.
 setupClose.addEventListener('click', function () {
@@ -149,12 +154,22 @@ userNameInput.addEventListener('input', function (evt) {
   }
 });
 
-userNameInput.addEventListener('keydown', function (evt) {
-  evt.preventDefault();
-  if (evt.keyCode === ESC_KEYCODE) {
-    evt.preventDefault();
-  }
-});
+// ----------------------
+// userNameInput
+// menu.onclick = function(event) {
+//   if (event.target.nodeName != 'A') return;
+
+//   var href = event.target.getAttribute('href');
+//   alert( href ); // может быть подгрузка с сервера, генерация интерфейса и т.п.
+
+//   return false; // отменить переход по url
+// };
+// userNameInput.addEventListener('keydown', function (evt) {
+//   if (evt.keyCode === ESC_KEYCODE) {
+//     event.preventDefault(userNameInput);
+//   }
+//     return false;
+// });
 
 
 // добавим доступности закрывающему крестику, определим класс крестика
