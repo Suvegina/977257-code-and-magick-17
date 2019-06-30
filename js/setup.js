@@ -126,7 +126,7 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-// а теперь преейдем к валидации формы:
+// а теперь пререйдем к валидации формы:
 // если поле невалидно, указать .setCustomValidity сообщение, описывающее проблему.
 var userNameInput = setup.querySelector('.setup-user-name');
 
@@ -154,9 +154,6 @@ userNameInput.addEventListener('input', function (evt) {
   }
 });
 
-
-// добавим доступности закрывающему крестику, определим класс крестика
-// var userOpenIcon = document.querySelector('.setup-open-icon');
 
 // Полей с цветом плаща, глаз и фаерболла у нас нет,
 // поэтому для них мы заведём скрытые (hidden) поля, которые будут
