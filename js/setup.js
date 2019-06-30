@@ -130,7 +130,7 @@ setupClose.addEventListener('keydown', function (evt) {
 // если поле невалидно, указать .setCustomValidity сообщение, описывающее проблему.
 var userNameInput = setup.querySelector('.setup-user-name');
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
     userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   } else if (userNameInput.validity.tooLong) {
@@ -154,34 +154,13 @@ userNameInput.addEventListener('input', function (evt) {
   }
 });
 
-// ----------------------
-// userNameInput
-// menu.onclick = function(event) {
-//   if (event.target.nodeName != 'A') return;
-
-//   var href = event.target.getAttribute('href');
-//   alert( href ); // может быть подгрузка с сервера, генерация интерфейса и т.п.
-
-//   return false; // отменить переход по url
-// };
-// userNameInput.addEventListener('keydown', function (evt) {
-//   if (evt.keyCode === ESC_KEYCODE) {
-//     event.preventDefault(userNameInput);
-//   }
-//     return false;
-// });
-
 
 // добавим доступности закрывающему крестику, определим класс крестика
-var userOpenIcon = document.querySelector('.setup-open-icon');
+// var userOpenIcon = document.querySelector('.setup-open-icon');
 
 // Полей с цветом плаща, глаз и фаерболла у нас нет,
 // поэтому для них мы заведём скрытые (hidden) поля, которые будут
 // отправляться вместе с формой, но видны пользователю не будут.
-
-// var userOpenIcon = document.querySelector('.setup-open-icon');
-// userOpenIcon.tabindex ='0';
-
 
 // определяем случайный цвет плащу мага
 var coatElement = document.querySelector('.setup-wizard .wizard-coat');
@@ -189,7 +168,7 @@ coatElement.style.cursor = 'pointer';
 
 var onCoatClick = function () {
   coatElement.style.fill = WIZARD_PLAYERS.coatColor[getRandomItem(WIZARD_PLAYERS.coatColor)];
-}
+};
 coatElement.addEventListener('click', onCoatClick);
 
 
@@ -199,7 +178,7 @@ eyesElement.style.cursor = 'pointer';
 
 var onEyesClick = function () {
   eyesElement.style.fill = WIZARD_PLAYERS.eyesColor[getRandomItem(WIZARD_PLAYERS.eyesColor)];
-}
+};
 eyesElement.addEventListener('click', onEyesClick);
 
 
@@ -209,35 +188,18 @@ fireballElement.style.cursor = 'pointer';
 
 var onFireballClick = function () {
   fireballElement.style.backgroundColor = WIZARD_PLAYERS.fireballColor[getRandomItem(WIZARD_PLAYERS.fireballColor)];
-}
+};
 fireballElement.addEventListener('click', onFireballClick);
 
 //  Чтобы форма отправлялась нам нужно указать куда (атрибут action) отправлять форму
 //  и как (атрибут method), а также задать тип формы при помощи атрибута enctype="multipart/form-data".
 //   Мы будем использовать multipart/form-data, чтобы иметь возможность отправлять файлы из формы.
 
-document.querySelector('.setup-wizard-form').action = "https://js.dump.academy/code-and-magick";
+document.querySelector('.setup-wizard-form').action = 'https://js.dump.academy/code-and-magick';
 /*
-
 <form class="setup-wizard-form"
   method="post"
   enctype="multipart/form-data"
   action="https://js.dump.academy/code-and-magick"
   autocomplete="off">
-...
-
 */
-
-// Внутри формы нужно сгенерировать input с его атрибутами для отправки формы
-/* <div class="setup-user">
-  <img class="setup-user-pic" src="./img/user-1.jpg"/>
-  <label> ...
-
-    <input
-      type="text"
-      class="setup-user-name"
-      value="Синий Пендальф"
-    />
-
-  </label>
-</div> */
